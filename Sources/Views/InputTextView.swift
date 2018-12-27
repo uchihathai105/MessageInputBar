@@ -189,10 +189,10 @@ open class InputTextView: UITextView {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(InputTextView.redrawTextAttachments),
-                                               name: UIDevice.orientationDidChangeNotification, object: nil)
+                                               name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(InputTextView.textViewTextDidChange),
-                                               name: UITextView.textDidChangeNotification, object: nil)
+                                               name: NSNotification.Name.UITextViewTextDidChange, object: nil)
     }
     
     /// Updates the placeholderLabels constraint constants to match the placeholderLabelInsets
@@ -208,7 +208,7 @@ open class InputTextView: UITextView {
     // MARK: - Notification
     
     private func postTextViewDidChangeNotification() {
-        NotificationCenter.default.post(name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.post(name: NSNotification.Name.UITextViewTextDidChange, object: self)
     }
     
     @objc

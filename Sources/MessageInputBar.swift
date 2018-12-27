@@ -325,16 +325,16 @@ open class MessageInputBar: UIView {
     private func setupObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(MessageInputBar.orientationDidChange),
-                                               name: UIDevice.orientationDidChangeNotification, object: nil)
+                                               name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(MessageInputBar.inputTextViewDidChange),
-                                               name: UITextView.textDidChangeNotification, object: inputTextView)
+                                               name: NSNotification.Name.UITextViewTextDidChange, object: inputTextView)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(MessageInputBar.inputTextViewDidBeginEditing),
-                                               name: UITextView.textDidBeginEditingNotification, object: inputTextView)
+                                               name: NSNotification.Name.UITextViewTextDidBeginEditing, object: inputTextView)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(MessageInputBar.inputTextViewDidEndEditing),
-                                               name: UITextView.textDidEndEditingNotification, object: inputTextView)
+                                               name: NSNotification.Name.UITextViewTextDidEndEditing, object: inputTextView)
     }
     
     /// Adds all of the subviews
@@ -426,7 +426,7 @@ open class MessageInputBar: UIView {
             guard UIScreen.main.nativeBounds.height == 2436 else { return }
             if let window = window {
                 windowAnchor?.isActive = false
-                windowAnchor = contentView.bottomAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor, multiplier: 1)
+                windowAnchor = contentView.bottomAnchor.constraintLessThanOrEqualToSystemSpacingBelow(window.safeAreaLayoutGuide.bottomAnchor, multiplier: 1)
                 windowAnchor?.constant = -padding.bottom
                 windowAnchor?.priority = UILayoutPriority(rawValue: 750)
                 windowAnchor?.isActive = true
